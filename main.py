@@ -30,6 +30,24 @@ class Student:
         result += f'Курсы в процессе обучения: {",".join(self.courses_in_progress)}\n'
         result += f'Завершенные курсы: {",".join(self.finished_courses)}'
         return result
+    
+    @classmethod
+    def __verify_data(cls, other):
+        if not isinstance(other, Student):
+            raise TypeError('Unsupported operands types!')
+        return other
+
+    def __eq__(self, other):
+        operand = self.__verify_data(other)
+        return self._average_rate() == operand._average_rate()
+
+    def __lt__(self, other):
+        operand = self.__verify_data(other)
+        return self._average_rate() < operand._average_rate()
+
+    def __le__(self, other):
+        operand = self.__verify_data(other)
+        return self._average_rate() <= operand._average_rate()
 
 
 class Mentor:
@@ -56,6 +74,24 @@ class Lecturer(Mentor):
         result += f'Фамилия: {self.surname}\n'
         result += f'Средняя оценка за лекции: {self._average_rate()}'
         return result
+    
+    @classmethod
+    def __verify_data(cls, other):
+        if not isinstance(other, Lecturer):
+            raise TypeError('Unsupported operands types!')
+        return other
+
+    def __eq__(self, other):
+        operand = self.__verify_data(other)
+        return self._average_rate() == operand._average_rate()
+
+    def __lt__(self, other):
+        operand = self.__verify_data(other)
+        return self._average_rate() < operand._average_rate()
+
+    def __le__(self, other):
+        operand = self.__verify_data(other)
+        return self._average_rate() <= operand._average_rate()
 
 
 class Reviewer(Mentor):
@@ -71,6 +107,3 @@ class Reviewer(Mentor):
     def __str__(self):
         result = f'Имя: {self.name}\nФамилия: {self.surname}'
         return result
-
-
-
